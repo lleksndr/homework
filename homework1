@@ -1,0 +1,286 @@
+CREATE TABLE Patients (
+	patient_id INT Primary Key,
+	first_name VARCHAR(50),
+	last_name VARCHAR(50),
+	patient_email VARCHAR(50),
+	patient_phone_number VARCHAR(50),
+	date_of_birth DATE
+);
+
+
+INSERT INTO Patients (patient_id, first_name, last_name, patient_email, patient_phone_number, date_of_birth)
+VALUES
+(1, 'John', 'Doe', 'john.doe@email.com', '1234567890', '1980-02-15'),
+(2, 'Jane', 'Smith', 'jane.smith@email.com', '9876543210', '1975-06-28'),
+(3, 'Michael', 'Brown', 'michael.brown@email.com', '5556667777', '1992-11-02'),
+(4, 'Emily', 'Johnson', 'emily.johnson@email.com', '4443332222', '1988-09-12'),
+(5, 'Daniel', 'White', 'daniel.white@email.com', '2221110000', '1990-03-30'),
+(6, 'Sarah', 'Green', 'sarah.green@email.com', '1230987654', '1985-07-14'),
+(7, 'David', 'Williams', 'david.williams@email.com', '3216549870', '1979-05-09'),
+(8, 'Laura', 'Martinez', 'laura.martinez@email.com', '7418529630', '1983-12-21'),
+(9, 'James', 'Lee', 'james.lee@email.com', '9513574862', '1995-10-06'),
+(10, 'Lisa', 'Kim', 'lisa.kim@email.com', '2587413698', '1982-01-03'),
+(11, 'Andrew', 'Garcia', 'andrew.garcia@email.com', '7531598524', '1994-04-18'),
+(12, 'Angela', 'Lopez', 'angela.lopez@email.com', '1593574862', '1986-08-24'),
+(13, 'Chris', 'Harris', 'chris.harris@email.com', '7539518526', '1991-09-17'),
+(14, 'Rachel', 'Clark', 'rachel.clark@email.com', '1597894563', '1987-11-30'),
+(15, 'Steven', 'Wright', 'steven.wright@email.com', '3579518524', '1989-02-22'),
+(16, 'Jennifer', 'Walker', 'jennifer.walker@email.com', '8529516547', '1984-07-19'),
+(17, 'Richard', 'Allen', 'richard.allen@email.com', '7532581594', '1976-04-25'),
+(18, 'Susan', 'Young', 'susan.young@email.com', '9517532584', '1993-05-15'),
+(19, 'Joseph', 'King', 'joseph.king@email.com', '6548529631', '1981-03-03'),
+(20, 'Megan', 'Adams', 'megan.adams@email.com', '9514568523', '1996-09-26');
+
+
+
+CREATE TABLE Doctors (
+    doctor_id INT Primary Key,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    specialization VARCHAR(50),
+    doctor_email VARCHAR(50),
+    doctor_phone_number VARCHAR(50)
+);
+
+
+INSERT INTO Doctors (doctor_id,first_name, last_name, specialization, doctor_email, doctor_phone_number)
+VALUES
+(101, 'Sarah', 'Wilson', 'General Practitioner', 'sarah.wilson@clinic.com', '1234567890'),
+(102, 'David', 'Miller', 'Pediatrician', 'david.miller@clinic.com', '9876543210'),
+(103, 'Susan', 'Lee', 'Orthopedic Specialist', 'susan.lee@clinic.com', '5556667777'),
+(104, 'James', 'Martinez', 'Dermatologist', 'james.martinez@clinic.com', '4443332222'),
+(105, 'Emily', 'Davis', 'Cardiologist', 'emily.davis@clinic.com', '2221110000'),
+(106, 'Robert', 'Brown', 'Neurologist', 'robert.brown@clinic.com', '1112223334'),
+(107, 'Mary', 'Johnson', 'Endocrinologist', 'mary.johnson@clinic.com', '6665554443'),
+(108, 'Linda', 'Clark', 'Gynecologist', 'linda.clark@clinic.com', '8889997776'),
+(109, 'Richard', 'Moore', 'Psychiatrist', 'richard.moore@clinic.com', '4442226665'),
+(110, 'Barbara', 'Harris', 'Oncologist', 'barbara.harris@clinic.com', '3334445557'),
+(111, 'John', 'Lewis', 'Pulmonologist', 'john.lewis@clinic.com', '1113332228'),
+(112, 'Karen', 'Walker', 'Gastroenterologist', 'karen.walker@clinic.com', '2224445559'),
+(113, 'William', 'Allen', 'Rheumatologist', 'william.allen@clinic.com', '5556664447'),
+(114, 'Jessica', 'Young', 'Infectious Disease', 'jessica.young@clinic.com', '6667778886'),
+(115, 'Mark', 'King', 'Surgeon', 'mark.king@clinic.com', '7778889997'),
+(116, 'Charles', 'Green', 'Urologist', 'charles.green@clinic.com', '9991113338'),
+(117, 'Karen', 'Adams', 'Ophthalmologist', 'karen.adams@clinic.com', '8885553337'),
+(118, 'Patricia', 'Scott', 'ENT Specialist', 'patricia.scott@clinic.com', '1116667775'),
+(119, 'George', 'Baker', 'Nephrologist', 'george.baker@clinic.com', '2228889999'),
+(120, 'Betty', 'Hill', 'Hematologist', 'betty.hill@clinic.com', '3339994441');
+
+
+
+CREATE TABLE Appointments (
+	appointment_id INT Primary Key,
+	patient_id INT,
+	doctor_id INT,
+	appointment_date DATE,
+	appointment_time TIME,
+	visit_reason VARCHAR(100),
+	FOREIGN KEY (patient_id) REFERENCES Patients(patient_id),
+    FOREIGN KEY (doctor_id) REFERENCES Doctors(doctor_id)
+);
+
+
+INSERT INTO Appointments (appointment_id, patient_id, doctor_id, appointment_date, appointment_time, visit_reason)
+VALUES
+(1, 1, 101, '2024-01-10', '10:00:00', 'Routine checkup'),
+(2, 2, 102, '2024-02-15', '14:30:00', 'Flu symptoms'),
+(3, 3, 103, '2024-03-22', '11:15:00', 'Back pain'),
+(4, 4, 104, '2024-04-05', '09:45:00', 'Skin rash'),
+(5, 5, 105, '2024-05-18', '13:30:00', 'Annual physical'),
+(6, 6, 106, '2024-06-11', '15:00:00', 'Headache'),
+(7, 7, 107, '2024-07-21', '10:45:00', 'Stomach pain'),
+(8, 8, 108, '2024-08-14', '12:00:00', 'Knee injury'),
+(9, 9, 109, '2024-09-19', '16:00:00', 'Allergic reaction'),
+(10, 10, 110, '2024-10-02', '14:00:00', 'Chest pain'),
+(11, 11, 111, '2024-11-17', '10:30:00', 'Cold and cough'),
+(12, 12, 112, '2024-12-01', '13:15:00', 'Migraine'),
+(13, 13, 113, '2024-01-05', '15:45:00', 'Anxiety'),
+(14, 14, 114, '2024-02-20', '11:30:00', 'Joint pain'),
+(15, 15, 115, '2024-03-13', '09:00:00', 'Blood pressure check'),
+(16, 16, 116, '2024-04-28', '14:45:00', 'Ear infection'),
+(17, 17, 117, '2024-05-03', '10:15:00', 'Vision issues'),
+(18, 18, 118, '2024-06-19', '12:45:00', 'Muscle strain'),
+(19, 19, 119, '2024-07-10', '15:15:00', 'Sore throat'),
+(20, 20, 120, '2024-08-25', '11:00:00', 'Diabetes management');
+
+
+
+CREATE TABLE Prescriptions (
+    prescription_id INT Primary Key,
+    appointment_id INT,
+    medicine_name VARCHAR(100),
+    dosage VARCHAR(50),
+    duration VARCHAR(50),
+    doctor_id INT,
+    FOREIGN KEY (appointment_id) REFERENCES Appointments(appointment_id),
+    FOREIGN KEY (doctor_id) REFERENCES Doctors(doctor_id)
+);
+
+
+INSERT INTO Prescriptions (prescription_id, appointment_id, medicine_name, dosage, duration, doctor_id)
+VALUES
+(1, 1, 'Amoxicillin', '500 mg', '7 days', 101),
+(2, 2, 'Ibuprofen', '200 mg', '5 days', 102),
+(3, 3, 'Naproxen', '250 mg', '10 days', 103),
+(4, 4, 'Hydrocortisone', '10 mg', '2 weeks', 104),
+(5, 5, 'Metformin', '1000 mg', '30 days', 105),
+(6, 6, 'Lisinopril', '10 mg', '30 days', 106),
+(7, 7, 'Paracetamol', '500 mg', '3 days', 107),
+(8, 8, 'Tramadol', '50 mg', '1 week', 108),
+(9, 9, 'Loratadine', '10 mg', '5 days', 109),
+(10, 10, 'Atenolol', '25 mg', '30 days', 110),
+(11, 11, 'Amoxicillin', '500 mg', '7 days', 111),
+(12, 12, 'Ibuprofen', '200 mg', '5 days', 112),
+(13, 13, 'Naproxen', '250 mg', '10 days', 113),
+(14, 14, 'Hydrocortisone', '10 mg', '2 weeks', 114),
+(15, 15, 'Metformin', '1000 mg', '30 days', 115),
+(16, 16, 'Lisinopril', '10 mg', '30 days', 116),
+(17, 17, 'Paracetamol', '500 mg', '3 days', 117),
+(18, 18, 'Tramadol', '50 mg', '1 week', 118),
+(19, 19, 'Loratadine', '10 mg', '5 days', 119),
+(20, 20, 'Atenolol', '25 mg', '30 days', 120);
+
+
+
+CREATE TABLE Medical_History (
+    history_id INT Primary Key,
+    patient_id INT,
+    diagnosis VARCHAR(100),
+    treatment VARCHAR(100),
+    hospitalization_dates VARCHAR(50),
+    FOREIGN KEY (patient_id) REFERENCES Patients(patient_id)
+);
+
+
+INSERT INTO Medical_History (history_id, patient_id, diagnosis, treatment, hospitalization_dates)
+VALUES
+(1, 1, 'Hypertension', 'Lisinopril', '2023-03-12 to 2023-03-14'),
+(2, 2, 'Type 2 Diabetes', 'Metformin', 'None'),
+(3, 3, 'Osteoarthritis', 'Naproxen', 'None'),
+(4, 4, 'Eczema', 'Hydrocortisone', 'None'),
+(5, 5, 'High Cholesterol', 'Atorvastatin', 'None'),
+(6, 6, 'Asthma', 'Inhaler', 'None'),
+(7, 7, 'Migraine', 'Sumatriptan', 'None'),
+(8, 8, 'ACL Tear', 'Surgery', '2024-01-18 to 2024-01-22'),
+(9, 9, 'Allergies', 'Loratadine', 'None'),
+(10, 10, 'Angina', 'Nitroglycerin', '2023-11-05 to 2023-11-07'),
+(11, 11, 'Flu', 'Rest and Fluids', 'None'),
+(12, 12, 'High Blood Pressure', 'Lisinopril', 'None'),
+(13, 13, 'Anxiety Disorder', 'Cognitive Therapy', 'None'),
+(14, 14, 'Rheumatoid Arthritis', 'Methotrexate', 'None'),
+(15, 15, 'Diabetes Type 1', 'Insulin', 'None'),
+(16, 16, 'Ear Infection', 'Amoxicillin', 'None'),
+(17, 17, 'Glaucoma', 'Eye Drops', 'None'),
+(18, 18, 'Muscle Strain', 'Physical Therapy', 'None'),
+(19, 19, 'Strep Throat', 'Antibiotics', 'None'),
+(20, 20, 'Kidney Stones', 'Surgery', '2024-04-10 to 2024-04-12');
+
+
+
+
+select * FROM Patients;
+select * FROM Doctors;
+select * FROM Appointments;
+select * from Prescriptions;
+select * from Medical_History;
+
+
+
+SELECT 
+    P.patient_id,
+    P.first_name AS patient_first_name,
+    P.last_name AS patient_last_name,
+    A.visit_reason,
+    PR.medicine_name,
+    PR.dosage,
+    count(A.appointment_id) AS total_appointments,
+    D.first_name AS doctor_first_name,
+    D.last_name AS doctor_last_name
+FROM 
+    Patients P
+JOIN 
+    Appointments A ON P.patient_id = A.patient_id
+JOIN 
+    Doctors D ON A.doctor_id = D.doctor_id
+JOIN 
+    Prescriptions PR ON A.appointment_id = PR.appointment_id
+WHERE 
+    A.visit_reason LIKE '%pain%' OR A.visit_reason LIKE '%ache%'
+GROUP BY 
+    P.patient_id, P.first_name, P.last_name, A.visit_reason, PR.medicine_name, PR.dosage, D.first_name, D.last_name
+ORDER BY 
+    P.last_name ASC, P.first_name ASC;
+
+
+
+SELECT
+    P.first_name AS patient_first_name,
+    P.last_name AS patient_last_name,
+    A.visit_reason
+FROM 
+    Patients P
+JOIN 
+    Appointments A ON P.patient_id = A.patient_id
+WHERE 
+    A.visit_reason LIKE '%pain%' OR A.visit_reason LIKE '%ache%'
+
+UNION
+
+SELECT
+    P.first_name AS patient_first_name,
+    P.last_name AS patient_last_name,
+    A.visit_reason
+FROM 
+    Patients P
+JOIN 
+    Appointments A ON P.patient_id = A.patient_id
+WHERE 
+    A.visit_reason LIKE '%checkup%' OR A.visit_reason LIKE '%physical%'
+ORDER BY 
+    patient_last_name ASC, patient_first_name ASC;
+
+
+
+  
+WITH Pain_Ache_Patients AS (
+SELECT
+    P.patient_id,
+    P.first_name,
+    P.last_name,
+    A.appointment_id,
+    A.visit_reason
+FROM 
+    Patients P
+JOIN 
+    Appointments A ON P.patient_id = A.patient_id
+WHERE 
+    A.visit_reason LIKE '%pain%' OR A.visit_reason LIKE '%ache%'
+)
+SELECT 
+    P.patient_id,
+    P.first_name AS patient_first_name,
+    P.last_name AS patient_last_name,
+    PA.visit_reason,
+    PR.medicine_name,
+    PR.dosage,
+    D.first_name AS doctor_first_name,
+    D.last_name AS doctor_last_name
+FROM 
+    Pain_Ache_Patients PA
+JOIN 
+    Prescriptions PR ON PA.appointment_id = PR.appointment_id
+JOIN 
+    Doctors D ON PR.doctor_id = D.doctor_id
+JOIN 
+    Patients P ON PA.patient_id = P.patient_id
+ORDER BY 
+    P.last_name ASC, P.first_name ASC;
+
+
+
+
+
+
+
+
+
