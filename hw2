@@ -1,0 +1,82 @@
+create database if not exists hospital_db;
+use hospital_db;
+
+create table if not exists Patients (
+    patient_id int auto_increment primary key,
+    pat_name varchar(100) not null,
+    pat_surname varchar(100) not null,
+    pat_phone_number varchar(50) not null);
+
+create table if not exists Doctors (
+    doctor_id int auto_increment primary key,
+    doc_name varchar(100) not null,
+    doc_surname varchar(100) not null,
+    doc_phone_number varchar(50) not null,
+    specialization varchar(100) not null);
+
+create table if not exists Appointments (
+    appointment_id int auto_increment primary key,
+    appointment_date datetime not null,
+    appointment_reason varchar(100) not null,
+    patient_id int,
+    doctor_id int,
+    foreign key (patient_id) references Patients(patient_id),
+    foreign key (doctor_id) references Doctors(doctor_id));
+
+
+select * from Patients;
+select * from Doctors;
+select * from Appointments;
+
+
+explain
+select 
+    (select a.appointment_reason
+     from Patients p
+     join Appointments a on p.patient_id = a.patient_id
+     join Doctors d on a.doctor_id = d.doctor_id
+     group by a.appointment_reason
+     order by count(*) desc
+     limit 1) as most_common_reason,
+
+    (select a.appointment_reason
+     from Patients p
+     join Appointments a on p.patient_id = a.patient_id
+     join Doctors d on a.doctor_id = d.doctor_id
+     group by a.appointment_reason
+     order by count(*) asc
+     limit 1) as least_common_reason;
+
+
+
+create index idx_appointments_reason on Appointments(appointment_reason);
+create index idx_appointments_patient_id on Appointments(patient_id);
+create index idx_appointments_doctor_id on Appointments(doctor_id);
+
+
+
+explain
+with reason_counts as (
+    select 
+        a.appointment_reason,
+        count(*) as reason_count
+    from Appointments a
+    join Patients p on a.patient_id = p.patient_id
+    join Doctors d on a.doctor_id = d.doctor_id
+    group by a.appointment_reason)
+
+select 
+    (select appointment_reason 
+     from reason_counts 
+     order by reason_count desc 
+     limit 1) as most_common_reason,
+
+    (select appointment_reason 
+     from reason_counts 
+     order by reason_count asc 
+     limit 1) as least_common_reason;
+    
+      
+    
+    
+    
